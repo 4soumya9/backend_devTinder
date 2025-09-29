@@ -2,9 +2,9 @@ const express = require("express");
 // we have created the server
 const app = express();
 
-app.use("", (req, res) => {
-  res.send("From root Soumya Saha");
-});
+// app.use("", (req, res) => {
+//   res.send("From root Soumya Saha");
+// });
 app.use("/hello", (req, res) => {
   res.send("hello hello");
 });
