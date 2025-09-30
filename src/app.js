@@ -2,12 +2,28 @@ const express = require("express");
 // we have created the server
 const app = express();
 
-// app.use("", (req, res) => {
-//   res.send("From root Soumya Saha");
+// order of the routes are very imp.it goes from top to button and
+//  if the top one mathces  then it will give the result from the topone.
+
+// app.use("/", (req, res) => {
+//   res.send("ha haa");
 // });
-app.use("/hello", (req, res) => {
-  res.send("hello hello");
+
+//this will only handle GET call to /user
+app.get("/user", (req, res) => {
+  res.send({ firstName: "Soumya", lastName: "Roy" });
 });
+
+app.post("/user", (req, res) => {
+  //saving the data to db
+  res.send("Data successfully saved to the database");
+});
+
+app.delete("/user", (req, res) => {
+  res.send("Delete successfully");
+});
+
+// this will match all the HTTP method API calls to /test
 app.use("/test", (req, res) => {
   res.send("Hello from the server");
 });
