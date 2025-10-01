@@ -2,34 +2,20 @@ const express = require("express");
 // we have created the server
 const app = express();
 
-// order of the routes are very imp.it goes from top to button and
-//  if the top one mathces  then it will give the result from the topone.
-
-// app.use("/", (req, res) => {
-//   res.send("ha haa");
-// });
-
-//this will only handle GET call to /user
-app.get("/user", (req, res) => {
-  res.send({ firstName: "Soumya", lastName: "Roy" });
-});
-
-app.post("/user", (req, res) => {
-  //saving the data to db
-  res.send("Data successfully saved to the database");
-});
-
-app.delete("/user", (req, res) => {
-  res.send("Delete successfully");
-});
-
-// this will match all the HTTP method API calls to /test
-app.use("/test", (req, res) => {
-  res.send("Hello from the server");
+app.use("/user", (req, res) => {
+  //Route Handler
+  // res.send("Route Handler 1");... it will goes to infinite loop. after sometime after time out it does not return anything
+  console.log("Handling router");
 });
 
 // "/test" is a route
-
 app.listen(7777, () => {
   console.log("Server is listeniing to 7777");
 });
+
+// we cannot send two responses from same url . it will throw error
+// we can use multiple route handler
+
+//if we add next() at the last route handler , then it will an error.there is no route handler.
+
+//hw : array of route handler
