@@ -8,7 +8,7 @@ authRouter
 profile
 -GET/profile/view
 -PATCH/profile/edit
--PATCH/profile/password // forgot password API
+-PATCH/profile/password // forgot password API .. H.W
 
 connectionRequestRouter
 -POST/request/send/interested/:userId

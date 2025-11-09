@@ -17,6 +17,7 @@ const userSchema = new mongoose.Schema(
       lowercase: true,
       required: true,
       unique: true, //in the mongoose documentation All Schema Types
+      //  unique: true automatically creates an index in MongoDB.
       trim: true,
       validate(value) {
         if (!validator.isEmail(value)) {
@@ -40,11 +41,15 @@ const userSchema = new mongoose.Schema(
     },
     gender: {
       type: String,
-      validate(value) {
-        if (!["male", "female", "others"].includes(value)) {
-          throw new Error("Gender data is not valid");
-        }
-      }, //validate function will work only for new data , not the old(existing) data
+      enum: {
+        values: ["male", "female", "others"],
+        message: `{VALUE} is not a valid gender type`,
+      },
+      // validate(value) {
+      //   if (!["male", "female", "others"].includes(value)) {
+      //     throw new Error("Gender data is not valid");
+      //   }
+      // }, //validate function will work only for new data , not the old(existing) data
     },
     photoUrl: {
       type: String,
@@ -67,6 +72,9 @@ const userSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+
+
+
 
 const User = mongoose.model("User", userSchema); // Name should be in the caps, model is like a class
 module.exports = User;
