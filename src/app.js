@@ -8,7 +8,9 @@ const bcrypt = require("bcrypt");
 const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
 // const { userAuth } = require("./middlewares/auth");
+const cors = require("cors");
 
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
@@ -16,6 +18,20 @@ const authRouter = require("./routes/auth");
 const profileRouter = require("./routes/profile");
 const requestRouter = require("./routes/request");
 const userRouter = require("./routes/user");
+
+// ✅ CORS setup
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
+
+app.use(express.json());
+
+// ✅ 3️⃣ Parse cookies (if you use JWT/cookies)
+app.use(cookieParser());
 
 app.use("/", authRouter);
 app.use("/", profileRouter);
